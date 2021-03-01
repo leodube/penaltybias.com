@@ -6,9 +6,9 @@ const Navbar = () => {
   return (
     <div className="row border-bottom mt-5">
       <div className="col">
-        <a className="brand-logo" href="/">
+        {/* <a className="brand-logo" href="/">
           <img src={brand} width="35" height="35" alt="Brand"></img>
-        </a>
+        </a> */}
       </div>
       <div className="col-8">
         <h1 className="main text-center">Penalty Bias</h1>

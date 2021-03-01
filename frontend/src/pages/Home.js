@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Games from "../components";
+import {Games} from "../components";
 import predictPenaltyService from "../services/predictPenaltyService";
 
 const Home = () => {
@@ -17,7 +17,9 @@ const Home = () => {
   }
 
   return (
-    <p>{JSON.stringify(games)}</p>
+    <>
+    {games ? (<Games props={games} />) : (<p>loading</p>)}
+    </>
   );
 };
 
