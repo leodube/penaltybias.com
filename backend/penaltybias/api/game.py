@@ -11,7 +11,12 @@ class Game():
     away_stats = boxscore["teams"]["away"]["teamStats"]["teamSkaterStats"]
 
     self.period = linescore["currentPeriod"]
-    self.period_remaining = linescore["currentPeriodTimeRemaining"]
+
+    try:
+      self.period_remaining = linescore["currentPeriodTimeRemaining"]
+    except:
+      self.period_remaining = 20
+
     if self.period == 0:
       self.game_time = 0
       self.game_state = "Scheduled"
