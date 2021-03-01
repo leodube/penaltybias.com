@@ -19,4 +19,4 @@ class PenaltyApi(Resource):
 
 class Home(Resource):
   def get(self):
-    return {"home": "test"}
+    return Response("<h1>PenaltyBias API</h1>\n<p>Go to: /api/predict-penalties</p>", mimetype="text/html")
