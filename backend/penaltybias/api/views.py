@@ -16,3 +16,7 @@ class PenaltyApi(Resource):
       responsejson["games"].append(gamejson)
 
     return responsejson
+
+class Home(Resource):
+  def get(self):
+    return {"home": "test"}
