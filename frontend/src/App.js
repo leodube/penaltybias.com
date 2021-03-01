@@ -1,11 +1,25 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { hot } from "react-hot-loader";
+
+import { Navbar } from "./components";
+import { Home, About } from "./pages";
 
 const App = () => {
   return (
-    <div className="App">
-      <h1>Hello World!</h1>
-    </div>
+    <Router>
+      <div className="App">
+        <div className="container">
+          <Navbar />
+        </div>
+        <div className="container pt-5">
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/about" component={About} />
+          </Switch>
+        </div>
+      </div>
+    </Router>
   );
 };
 
