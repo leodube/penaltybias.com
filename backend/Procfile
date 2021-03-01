@@ -1,1 +1,1 @@
-web: gunicorn runserver:penaltybias
+web: gunicorn runserver:app
