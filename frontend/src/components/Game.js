@@ -1,11 +1,26 @@
 import React, { Fragment } from "react";
 
 const Game = (props) => {
+  const renderGameData = (state, timeLeft) => {
+    if (
+      state == "Overtime" ||
+      state == "Period 1" ||
+      state == "Period 2" ||
+      state == "Period 3"
+    ) {
+      return (
+        <div className="row border border-top-0 justify-content-center mt-0">
+          <p className="my-0 font-weight-light">{state} - Remaining: {timeLeft}</p>
+        </div>
+      );
+    }
+  };
+
   return (
     <Fragment>
       <p className="text-center mb-0">{props.gameState}</p>
       <div className="row game-block border">
-        <div className="col home-block border-right">
+        <div className="col home-block py-2 border-right">
           <div className="row">
             <div className="col-4 home-logo p-0">
               <img
@@ -24,7 +39,7 @@ const Game = (props) => {
             </div>
           </div>
         </div>
-        <div className="col away-block">
+        <div className="col away-block py-2">
           <div className="row">
             <div className="col-4 order-md-3 away-logo p-0">
               <img
@@ -44,6 +59,7 @@ const Game = (props) => {
           </div>
         </div>
       </div>
+      {renderGameData(props.gameState, props.periodRemaining)}
     </Fragment>
   );
 };
