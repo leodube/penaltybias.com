@@ -80,7 +80,7 @@ class Game():
     x2 = self.away_goals - self.home_goals
     x3 = self.game_time
     B = -0.1237 + (0.4014*x1) - (0.0520*x2) - (0.0046*x1*x3)
-    self.next_penalty_odds = round(math.exp(B) / (1+math.exp(B)))
+    self.next_penalty_odds = round(math.exp(B) / (1+math.exp(B)), 4)
     return round(B, 4)
 
 class GameEncoder(json.JSONEncoder):

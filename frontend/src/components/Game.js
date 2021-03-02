@@ -10,7 +10,9 @@ const Game = (props) => {
     ) {
       return (
         <div className="row border border-top-0 justify-content-center mt-0">
-          <p className="my-0 font-weight-light">{state} - Remaining: {timeLeft}</p>
+          <p className="my-0 font-weight-light">
+            {state} - Remaining: {timeLeft}
+          </p>
         </div>
       );
     }
@@ -19,42 +21,54 @@ const Game = (props) => {
   return (
     <Fragment>
       <p className="text-center mb-0">{props.gameState}</p>
-      <div className="row game-block border">
-        <div className="col home-block py-2 border-right">
+      <div className="game-block row border">
+        <div className="home-block col py-2 border-right">
           <div className="row">
-            <div className="col-4 home-logo p-0">
+            <div className="home-logo col-4 p-0 m-auto">
               <img
                 className="img-fluid mr-auto"
                 src={props.teams.home.logo}
                 alt=""
               />
             </div>
-            <div className="col-md-auto home-goals px-0 v-center">
-              <h4 className="goals">{props.teams.home.goals}</h4>
+            <div className="home-goals col-md-auto px-0 v-center">
+              <h4 className="goals m-auto">{props.teams.home.goals}</h4>
             </div>
-            <div className="col home-details">
-              <h3 className="text-center team-name mt-2 ml-1">
+            <div className="home-details col my-auto ml-3">
+              <h3 className="team-name text-left mt-2">
                 {props.teams.home.name}
               </h3>
+              <p className="powerplays font-weight-light text-left mb-0">
+                Powerplay opportunities: {props.teams.home.powerplays}
+              </p>
+              <p className="chance-of-pp font-weight-light text-left">
+                Chance of getting next powerplay:
+              </p>
             </div>
           </div>
         </div>
-        <div className="col away-block py-2">
+        <div className="away-block col py-2">
           <div className="row">
-            <div className="col-4 order-md-3 away-logo p-0">
+            <div className="away-logo col-4 order-md-3 p-0 m-auto">
               <img
                 className="img-fluid ml-auto"
                 src={props.teams.away.logo}
                 alt=""
               />
             </div>
-            <div className="col-md-auto order-md-2 away-goals px-0 v-center">
-              <h4 className="goals">{props.teams.home.goals}</h4>
+            <div className="away-goals col-md-auto order-md-2 px-0 v-center">
+              <h4 className="goals m-auto">{props.teams.home.goals}</h4>
             </div>
-            <div className="col order-md-1 away-details">
-              <h3 className="text-center team-name mt-2 mr-1">
+            <div className="away-details col order-md-1 my-auto mr-3">
+              <h3 className="team-name text-right mt-2">
                 {props.teams.away.name}
               </h3>
+              <p className="powerplays font-weight-light text-right mb-0">
+                Powerplay opportunities: {props.teams.home.powerplays}
+              </p>
+              <p className="chance-of-pp font-weight-light text-right">
+                Chance of getting next powerplay:
+              </p>
             </div>
           </div>
         </div>
