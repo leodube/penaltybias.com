@@ -40,7 +40,7 @@ class Game():
   def set_game_time(self, period, period_time_remaining):
     if period_time_remaining == 'Final':
       if period == '4':
-        return 65, 'Final'
+        return 65, 'Final (OT)'
       else:
         return 60, 'Final'
 
