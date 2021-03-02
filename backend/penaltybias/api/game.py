@@ -39,16 +39,28 @@ class Game():
 
   def set_game_time(self, period, period_time_remaining):
     if period_time_remaining == 'Final':
-      return 60, 'Final'
+      if period == '4':
+        return 65, 'Final'
+      else:
+        return 60, 'Final'
+
     elif period_time_remaining == 'End':
       return ((period-1)*20)+20, 'End of period {}'.format(period)
+
     elif not re.match(r'^[0-2][0-9]:[0-5][0-9]', period_time_remaining):
       return 20, 'Error'
+
     else:
       (m,s) = period_time_remaining.split(':')
-      period_time = 1200 - int(m)*60 + int(s)
+      if period == 4:
+        period_time = 300 - int(m)*60 + int(s)
+        game_state = 'Overtime'
+      else:
+        period_time = 1200 - int(m)*60 + int(s)
+        game_state = 'Period {}'.format(period)
       game_time = ((period-1) * 1200) + period_time
-    return (game_time / 60), 'In Progress'
+
+    return (game_time / 60), game_state
   
   # From "Biased Penalty Calls in the National Hockey League"
   # By: David Beaudoin, Oliver Schulte and Tim B. Swartz

@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import brand from "../images/brand.svg";
+import brand from "../images/whistle.svg";
 
 const Navbar = () => {
   return (
     <div className="row border-bottom mt-5">
-      <div className="col">
-        {/* <a className="brand-logo" href="/">
-          <img src={brand} width="35" height="35" alt="Brand"></img>
-        </a> */}
+      <div className="col v-center">
+        <a className="brand-logo align-middle" href="/">
+          <img src={brand} width="50" height="50" alt="Brand"></img>
+        </a>
       </div>
       <div className="col-8">
         <h1 className="main text-center">Penalty Bias</h1>

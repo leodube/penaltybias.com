@@ -1,10 +1,16 @@
-import React from 'react';
-import Game from './Game';
+import React from "react";
+import Game from "./Game";
 
-const Games = () => {
+const Games = (props) => {
   return (
-    <></>
+    <div className="games-block">
+      {props.games.map((game, index) => (
+        <div key={index} className="game-block-wrapper mb-4">
+          <Game {...game} />
+        </div>
+      ))}
+    </div>
   );
-}
+};
 
 export default Games;

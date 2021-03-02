@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {Games} from "../components";
+import { Games } from "../components";
 import predictPenaltyService from "../services/predictPenaltyService";
 
 const Home = () => {
@@ -14,12 +14,15 @@ const Home = () => {
   const getGames = async () => {
     let res = await predictPenaltyService.get();
     setGames(res);
-  }
+  };
 
   return (
-    <>
-    {games ? (<Games props={games} />) : (<p>loading</p>)}
-    </>
+    <div className="row justify-content-center">
+      <div className="col col-lg-11 games-block-wrapper">
+        {console.log(JSON.stringify(games, null, 4))}
+        {games ? <Games {...games} /> : <p>loading</p>}
+      </div>
+    </div>
   );
 };
 
