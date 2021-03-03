@@ -5,9 +5,11 @@ import re
 
 class Game():
   def __init__(self, gamepk):
+    # Call NHL API
     linescore = requests.get("https://statsapi.web.nhl.com/api/v1/game/{}/linescore".format(gamepk)).json()
     boxscore = requests.get("https://statsapi.web.nhl.com/api/v1/game/{}/boxscore".format(gamepk)).json()
 
+    # Attempt to get skater stats
     try:
       home_stats = boxscore["teams"]["home"]["teamStats"]["teamSkaterStats"]
       away_stats = boxscore["teams"]["away"]["teamStats"]["teamSkaterStats"]
@@ -15,6 +17,7 @@ class Game():
       home_stats = {"goals":0, "powerPlayOpportunities":0}
       away_stats = {"goals":0, "powerPlayOpportunities":0}
 
+    # Set game time and state variables
     self.period = linescore["currentPeriod"]
     try:
       self.period_remaining = linescore["currentPeriodTimeRemaining"]
@@ -27,6 +30,7 @@ class Game():
     else:
       self.game_time, self.game_state = self.set_game_time(self.period, self.period_remaining)
 
+    # Team Variables
     self.home_team = boxscore["teams"]["home"]["team"]["name"]
     self.home_id = boxscore["teams"]["home"]["team"]["id"]
     self.home_svg = "https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{}.svg".format(self.home_id)
@@ -39,6 +43,11 @@ class Game():
     self.away_svg = "https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{}.svg".format(self.away_id)
     self.away_goals = away_stats["goals"]
     self.away_pps = away_stats["powerPlayOpportunities"]
+
+    # Get team abbreviations
+    team_stats = requests.get("https://statsapi.web.nhl.com/api/v1/teams?teamId={},{}&expand=team.stats".format(self.home_id, self.away_id)).json()
+    self.home_abbreviation = team_stats["teams"][0]["abbreviation"]
+    self.away_abbreviation = team_stats["teams"][1]["abbreviation"]
 
 
   def set_game_time(self, period, period_time_remaining):
@@ -91,9 +100,8 @@ class Game():
   # If within 10 places in the standings, then teams considered even match
   def find_team_strength_param(self):
     try:
-      team_stats = requests.get("https://statsapi.web.nhl.com/api/v1/teams?teamId={},{}&expand=team.stats".format(self.home_id, self.away_id)).json()
-      home_pts = team_stats["teams"][0]["teamStats"][0]["splits"][1]["stat"]["pts"]
-      away_pts = team_stats["teams"][1]["teamStats"][0]["splits"][1]["stat"]["pts"]
+      home_pts = self.team_stats["teams"][0]["teamStats"][0]["splits"][1]["stat"]["pts"]
+      away_pts = self.team_stats["teams"][1]["teamStats"][0]["splits"][1]["stat"]["pts"]
     except:
       return 0
     home_pts = int(re.sub(r"(?<=\d)(st|nd|rd|th)\b", '', home_pts))
@@ -121,6 +129,7 @@ class GameEncoder(json.JSONEncoder):
           "away" : {
             "id" : obj.away_id,
             "name" : obj.away_team,
+            "abbreviation": obj.away_abbreviation
             "logo" : obj.away_svg,
             "goals" : obj.away_goals,
             "powerplays" : obj.away_pps,
@@ -128,6 +137,7 @@ class GameEncoder(json.JSONEncoder):
           "home" : {
             "id" : obj.home_id,
             "name" : obj.home_team,
+            "abbreviation": obj.home_abbreviation
             "logo" : obj.home_svg,
             "goals" : obj.home_goals,
             "powerplays" : obj.home_pps,

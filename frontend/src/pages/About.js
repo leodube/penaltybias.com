@@ -82,7 +82,7 @@ const About = () => {
         </p>
         <p>All things being equal, penalties are called on the road team in a 11:10 ratio.<a href="https://www.sfu.ca/~tswartz/papers/goalie.pdf" target="_blank">[1]</a></p>
         <br />
-        <p>
+        <p className="mb-5">
           Code for this project can be found on{" "}
           <a href="https://github.com/leodube/penalty-bias" target="_blank">
             Github.
