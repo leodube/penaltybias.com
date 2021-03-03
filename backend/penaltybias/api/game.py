@@ -76,7 +76,7 @@ class Game():
   #      relative influence: ~0.78
   # Note: x4 not implemented
   def predict_next_penalty(self):
-    x1 = self.away_pps - self.home_pps
+    x1 = self.home_pps - self.away_pps
     x2 = self.away_goals - self.home_goals
     x3 = self.game_time
     B = -0.1237 + (0.4014*x1) - (0.0520*x2) - (0.0046*x1*x3)

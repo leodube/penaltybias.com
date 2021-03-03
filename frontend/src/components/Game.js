@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+const roundTo = require('round-to');
 
 const Game = (props) => {
   const renderGameData = (state, timeLeft) => {
@@ -11,12 +12,20 @@ const Game = (props) => {
       return (
         <div className="row border border-top-0 justify-content-center mt-0">
           <p className="my-0 font-weight-light">
-            {state} - Remaining: {timeLeft}
+            Remaining: {timeLeft}
           </p>
         </div>
       );
     }
   };
+
+  const getPPOdds = (team, odds) => {
+    if (team == 'home'){
+      return roundTo((1 - odds) * 100, 2)
+    } else {
+      return roundTo(odds * 100, 2)
+    }
+  }
 
   return (
     <Fragment>
@@ -35,15 +44,16 @@ const Game = (props) => {
               <h4 className="goals m-auto">{props.teams.home.goals}</h4>
             </div>
             <div className="home-details col my-auto ml-3">
-              <h3 className="team-name text-left mt-2">
+              <h3 className="team-name text-right mt-2">
                 {props.teams.home.name}
               </h3>
-              <p className="powerplays font-weight-light text-left mb-0">
+              <p className="powerplays font-weight-light text-right mb-0">
                 Powerplay opportunities: {props.teams.home.powerplays}
               </p>
-              <p className="chance-of-pp font-weight-light text-left">
+              <p className="chance-of-pp font-weight-light text-right mb-2">
                 Chance of getting next powerplay:
               </p>
+              <h4 className="powerplay-odds text-right">{getPPOdds('home', props.penaltyOnHomeTeamOdds)}%</h4>
             </div>
           </div>
         </div>
@@ -57,18 +67,19 @@ const Game = (props) => {
               />
             </div>
             <div className="away-goals col-md-auto order-md-2 px-0 v-center">
-              <h4 className="goals m-auto">{props.teams.home.goals}</h4>
+              <h4 className="goals m-auto">{props.teams.away.goals}</h4>
             </div>
             <div className="away-details col order-md-1 my-auto mr-3">
-              <h3 className="team-name text-right mt-2">
+              <h3 className="team-name text-left mt-2">
                 {props.teams.away.name}
               </h3>
-              <p className="powerplays font-weight-light text-right mb-0">
-                Powerplay opportunities: {props.teams.home.powerplays}
+              <p className="powerplays font-weight-light text-left mb-0">
+                Powerplay opportunities: {props.teams.away.powerplays}
               </p>
-              <p className="chance-of-pp font-weight-light text-right">
+              <p className="chance-of-pp font-weight-light text-left mb-2">
                 Chance of getting next powerplay:
               </p>
+              <h4 className="powerplay-odds text-left">{getPPOdds('away', props.penaltyOnHomeTeamOdds)}%</h4>
             </div>
           </div>
         </div>
