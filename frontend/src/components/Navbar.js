@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <div className="row border-bottom mt-5">
       <div className="col-12 col-sm-8 order-sm-2">
-        <h1 className="main text-center">Penalty Bias</h1>
+        <h1 className="main-wrapper text-center"><a className="main" href="/">Penalty Bias</a></h1>
         <h2 className="subtitle text-center">
           Predicting which NHL team will get the next powerplay opportunity.
         </h2>
