@@ -73,7 +73,7 @@ const About = () => {
           </div>
           <div className="col">
             <p className="covariate-info">
-              team strength parameter wheree values 1/0/-1 correspond to the strongeer home team, evenly matched teams and a stronger road team baseed on regular season points
+              team strength parameter where values 1/0/-1 correspond to the stronger home team, evenly matched teams and a stronger road team based on regular season points
             </p>
           </div>
         </div>
