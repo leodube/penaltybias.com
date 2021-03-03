@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-const roundTo = require('round-to');
+const roundTo = require("round-to");
 
 const Game = (props) => {
   const renderGameData = (state, timeLeft) => {
@@ -11,21 +11,19 @@ const Game = (props) => {
     ) {
       return (
         <div className="row border border-top-0 justify-content-center mt-0">
-          <p className="my-0 font-weight-light">
-            Remaining: {timeLeft}
-          </p>
+          <p className="my-0 font-weight-light">Remaining: {timeLeft}</p>
         </div>
       );
     }
   };
 
   const getPPOdds = (team, odds) => {
-    if (team == 'home'){
-      return roundTo((1 - odds) * 100, 2)
+    if (team == "home") {
+      return roundTo((1 - odds) * 100, 2);
     } else {
-      return roundTo(odds * 100, 2)
+      return roundTo(odds * 100, 2);
     }
-  }
+  };
 
   return (
     <Fragment>
@@ -48,12 +46,15 @@ const Game = (props) => {
                 {props.teams.home.name}
               </h3>
               <p className="powerplays font-weight-light text-right mb-0">
-                Powerplay opportunities: {props.teams.home.powerplays}
+                Powerplay opportunities:{" "}
+                <strong>{props.teams.home.powerplays}</strong>
               </p>
               <p className="chance-of-pp font-weight-light text-right mb-2">
-                Chance of getting next powerplay:
+                Chance of getting next powerplay
               </p>
-              <h4 className="powerplay-odds text-right">{getPPOdds('home', props.penaltyOnHomeTeamOdds)}%</h4>
+              <h4 className="powerplay-odds text-right">
+                {getPPOdds("home", props.penaltyOnHomeTeamOdds)}%
+              </h4>
             </div>
           </div>
         </div>
@@ -74,12 +75,15 @@ const Game = (props) => {
                 {props.teams.away.name}
               </h3>
               <p className="powerplays font-weight-light text-left mb-0">
-                Powerplay opportunities: {props.teams.away.powerplays}
+                Powerplay opportunities:{" "}
+                <strong>{props.teams.away.powerplays}</strong>
               </p>
               <p className="chance-of-pp font-weight-light text-left mb-2">
-                Chance of getting next powerplay:
+                Chance of getting next powerplay
               </p>
-              <h4 className="powerplay-odds text-left">{getPPOdds('away', props.penaltyOnHomeTeamOdds)}%</h4>
+              <h4 className="powerplay-odds text-left">
+                {getPPOdds("away", props.penaltyOnHomeTeamOdds)}%
+              </h4>
             </div>
           </div>
         </div>

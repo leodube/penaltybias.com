@@ -44,7 +44,7 @@ class Game():
       else:
         return 60, 'Final'
 
-    elif period_time_remaining == 'End':
+    elif period_time_remaining == 'END':
       return ((period-1)*20)+20, 'End of period {}'.format(period)
 
     elif not re.match(r'^[0-2][0-9]:[0-5][0-9]', period_time_remaining):

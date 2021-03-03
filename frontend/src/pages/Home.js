@@ -9,6 +9,10 @@ const Home = () => {
     if (!games) {
       getGames();
     }
+    const interval = setInterval(() => {
+      getGames();
+    }, 3000);
+    return () => clearInterval(interval);
   });
 
   const getGames = async () => {
@@ -19,8 +23,16 @@ const Home = () => {
   return (
     <div className="row justify-content-center">
       <div className="col col-lg-11 games-block-wrapper">
-        {console.log(JSON.stringify(games, null, 4))}
-        {games ? <Games {...games} /> : <p>loading</p>}
+        {games ? (
+          <Games {...games} />
+        ) : (
+          <div className="text-center"> 
+            <div className="row spinner-grow text-center" role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
+            <p className="mt-3">Loading.... This may take a moment</p>
+          </div>
+        )}
       </div>
     </div>
   );
