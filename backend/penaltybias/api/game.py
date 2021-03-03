@@ -71,17 +71,36 @@ class Game():
   #      relative influence: ~11.11
   # x3 = time in match (0-65)
   #      relative influence: ~8.98
-  # x4 = team strength 
+  # x4 = team strength  parameter
   #      values: 1/0/-1 (stronger home / even match / stronger away)
   #      relative influence: ~0.78
-  # Note: x4 not implemented
   def predict_next_penalty(self):
     x1 = self.home_pps - self.away_pps
     x2 = self.away_goals - self.home_goals
     x3 = self.game_time
-    B = -0.1237 + (0.4014*x1) - (0.0520*x2) - (0.0046*x1*x3)
+    x4 = self.find_team_strength_param()
+    B = -0.1237 + (0.4014*x1) - (0.0520*x2) - (0.0299*x4) - (0.0046*x1*x3)
     self.next_penalty_odds = round(math.exp(B) / (1+math.exp(B)), 4)
     return round(B, 4)
+
+  # Based on regular season points.
+  # If within 10 places in the standings, then teams considered even match
+  def find_team_strength_param(self):
+    team_stats = requests.get("https://statsapi.web.nhl.com/api/v1/teams?teamId={},{}&expand=team.stats".format(self.home_id, self.away_id)).json()
+    home_pts = team_stats["teams"][0]["teamStats"][0]["splits"][1]["stat"]["pts"]
+    away_pts = team_stats["teams"][1]["teamStats"][0]["splits"][1]["stat"]["pts"]
+    home_pts = int(re.sub(r"(?<=\d)(st|nd|rd|th)\b", '', home_pts))
+    away_pts = int(re.sub(r"(?<=\d)(st|nd|rd|th)\b", '', away_pts))
+
+    pts_diff = home_pts - away_pts
+    if abs(pts_diff) <= 5:
+      x4 = 0
+    elif pts_diff < 0:
+      x4 = -1
+    else:
+      x4 = 1
+    return x4
+
 
 class GameEncoder(json.JSONEncoder):
   def default(self, obj):
