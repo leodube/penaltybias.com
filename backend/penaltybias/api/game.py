@@ -12,10 +12,8 @@ class Game():
       home_stats = boxscore["teams"]["home"]["teamStats"]["teamSkaterStats"]
       away_stats = boxscore["teams"]["away"]["teamStats"]["teamSkaterStats"]
     except:
-      home_stats["goals"] = 0
-      home_stats["powerPlayOpportunities"] = 0
-      away_stats["goals"] = 0
-      away_stats["powerPlayOpportunities"] = 0
+      home_stats = {"goals":0, "powerPlayOpportunities":0}
+      home_stats = {"goals":0, "powerPlayOpportunities":0}
 
     self.period = linescore["currentPeriod"]
     try:
