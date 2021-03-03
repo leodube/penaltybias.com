@@ -92,10 +92,10 @@ class Game():
   def find_team_strength_param(self):
     try:
       team_stats = requests.get("https://statsapi.web.nhl.com/api/v1/teams?teamId={},{}&expand=team.stats".format(self.home_id, self.away_id)).json()
+      home_pts = team_stats["teams"][0]["teamStats"][0]["splits"][1]["stat"]["pts"]
+      away_pts = team_stats["teams"][1]["teamStats"][0]["splits"][1]["stat"]["pts"]
     except:
       return 0
-    home_pts = team_stats["teams"][0]["teamStats"][0]["splits"][1]["stat"]["pts"]
-    away_pts = team_stats["teams"][1]["teamStats"][0]["splits"][1]["stat"]["pts"]
     home_pts = int(re.sub(r"(?<=\d)(st|nd|rd|th)\b", '', home_pts))
     away_pts = int(re.sub(r"(?<=\d)(st|nd|rd|th)\b", '', away_pts))
 
