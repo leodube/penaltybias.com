@@ -137,7 +137,7 @@ class GameEncoder(json.JSONEncoder):
           "home" : {
             "id" : obj.home_id,
             "name" : obj.home_team,
-            "abbreviation": obj.home_abbreviation
+            "abbreviation": obj.home_abbreviation,
             "logo" : obj.home_svg,
             "goals" : obj.home_goals,
             "powerplays" : obj.home_pps,
