@@ -90,7 +90,10 @@ class Game():
   # Based on regular season points.
   # If within 10 places in the standings, then teams considered even match
   def find_team_strength_param(self):
-    team_stats = requests.get("https://statsapi.web.nhl.com/api/v1/teams?teamId={},{}&expand=team.stats".format(self.home_id, self.away_id)).json()
+    try:
+      team_stats = requests.get("https://statsapi.web.nhl.com/api/v1/teams?teamId={},{}&expand=team.stats".format(self.home_id, self.away_id)).json()
+    except:
+      return 0
     home_pts = team_stats["teams"][0]["teamStats"][0]["splits"][1]["stat"]["pts"]
     away_pts = team_stats["teams"][1]["teamStats"][0]["splits"][1]["stat"]["pts"]
     home_pts = int(re.sub(r"(?<=\d)(st|nd|rd|th)\b", '', home_pts))
