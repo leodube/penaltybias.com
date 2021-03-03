@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { isMobile } from "react-device-detect";
 const roundTo = require("round-to");
 
 import HomeBlock from "./HomeBlock"
@@ -35,14 +36,14 @@ const Game = (props) => {
         <HomeBlock 
           logo={props.teams.home.logo}
           goals={props.teams.home.goals}
-          name={props.teams.home.name}
+          name={isMobile ? props.teams.home.abbreviation : props.teams.home.name}
           powerplays={props.teams.home.powerplays}
           nextPPChance={getPPOdds("home", props.penaltyOnHomeTeamOdds)}
         />
         <AwayBlock 
           logo={props.teams.away.logo}
           goals={props.teams.away.goals}
-          name={props.teams.away.name}
+          name={isMobile ? props.teams.away.abbreviation : props.teams.away.name}
           powerplays={props.teams.away.powerplays}
           nextPPChance={getPPOdds("away", props.penaltyOnHomeTeamOdds)}
         />

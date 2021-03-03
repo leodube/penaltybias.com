@@ -9,7 +9,7 @@ const AwayBlock = (props) => {
             <div className="col order-lg-2 py-2">
               <img className="img-fluid ml-auto" src={props.logo} alt="" />
             </div>
-            <div className="col-lg-auto order-lg-1 ml-lg-2 px-0 v-center bg-primary">
+            <div className="col-lg-auto order-lg-1 ml-lg-2 px-0 v-center">
               <h4 className="goals m-auto">{props.goals}</h4>
             </div>
           </div>

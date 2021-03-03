@@ -9,7 +9,7 @@ const HomeBlock = (props) => {
             <div className="col py-2">
               <img className="img-fluid mr-auto" src={props.logo} alt="" />
             </div>
-            <div className="col-lg-auto px-0 mr-lg-2 v-center bg-primary">
+            <div className="col-lg-auto px-0 mr-lg-2 v-center">
               <h4 className="goals m-auto">{props.goals}</h4>
             </div>
           </div>
