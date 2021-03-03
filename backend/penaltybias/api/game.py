@@ -129,7 +129,7 @@ class GameEncoder(json.JSONEncoder):
           "away" : {
             "id" : obj.away_id,
             "name" : obj.away_team,
-            "abbreviation": obj.away_abbreviation
+            "abbreviation": obj.away_abbreviation,
             "logo" : obj.away_svg,
             "goals" : obj.away_goals,
             "powerplays" : obj.away_pps,
