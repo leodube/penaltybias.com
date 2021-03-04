@@ -45,7 +45,7 @@ class Game():
     self.away_pps = away_stats["powerPlayOpportunities"]
 
     # Get team abbreviations
-    team_stats = requests.get("https://statsapi.web.nhl.com/api/v1/teams?teamId={},{}&expand=team.stats".format(self.home_id, self.away_id)).json()
+    self.team_stats = requests.get("https://statsapi.web.nhl.com/api/v1/teams?teamId={},{}&expand=team.stats".format(self.home_id, self.away_id)).json()
     self.home_abbreviation = team_stats["teams"][0]["teamName"]
     self.away_abbreviation = team_stats["teams"][1]["teamName"]
 
