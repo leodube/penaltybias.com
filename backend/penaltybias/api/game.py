@@ -47,7 +47,7 @@ class Game():
     # Get team abbreviations
     self.team_stats = requests.get("https://statsapi.web.nhl.com/api/v1/teams?teamId={},{}&expand=team.stats".format(self.home_id, self.away_id)).json()
     self.home_abbreviation = self.team_stats["teams"][0]["teamName"]
-    self.away_abbreviation = self.xsteam_stats["teams"][1]["teamName"]
+    self.away_abbreviation = self.team_stats["teams"][1]["teamName"]
 
 
   def set_game_time(self, period, period_time_remaining):
