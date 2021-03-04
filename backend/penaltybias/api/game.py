@@ -30,6 +30,13 @@ class Game():
     else:
       self.game_time, self.game_state = self.set_game_time(self.period, self.period_remaining)
 
+    try:
+      currentPeriodOrdinal = linescore["currentPeriodOrdinal"]
+      if currentPeriodOrdinal == "SO":
+        self.game_state = "Final (SO)"
+    except:
+      pass
+
     # Team Variables
     self.home_team = boxscore["teams"]["home"]["team"]["name"]
     self.home_id = boxscore["teams"]["home"]["team"]["id"]
@@ -48,6 +55,11 @@ class Game():
     self.team_stats = requests.get("https://statsapi.web.nhl.com/api/v1/teams?teamId={},{}&expand=team.stats".format(self.home_id, self.away_id)).json()
     self.home_abbreviation = self.team_stats["teams"][0]["teamName"]
     self.away_abbreviation = self.team_stats["teams"][1]["teamName"]
+
+    # Adjust goals for SO
+    if self.game_state == "Final (SO)":
+      self.home_goals = linescore["teams"]["home"]["goals"]
+      self.away_goals = linescore["teams"]["away"]["goals"]
 
 
   def set_game_time(self, period, period_time_remaining):
