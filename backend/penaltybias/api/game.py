@@ -34,6 +34,8 @@ class Game():
       currentPeriodOrdinal = linescore["currentPeriodOrdinal"]
       if currentPeriodOrdinal == "SO":
         self.game_state = "Final (SO)"
+      elif currentPeriodOrdinal == "OT":
+        self.game_state = "Final (OT)"
     except:
       pass
 
