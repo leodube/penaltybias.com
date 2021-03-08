@@ -55,8 +55,12 @@ class Game():
 
     # Get team abbreviations
     self.team_stats = requests.get("https://statsapi.web.nhl.com/api/v1/teams?teamId={},{}&expand=team.stats".format(self.home_id, self.away_id)).json()
-    self.home_abbreviation = self.team_stats["teams"][0]["teamName"]
-    self.away_abbreviation = self.team_stats["teams"][1]["teamName"]
+    if self.team_stats["teams"][0]["id"] == self.home_id:
+      self.home_abbreviation = self.team_stats["teams"][0]["teamName"]
+      self.away_abbreviation = self.team_stats["teams"][1]["teamName"]
+    else:
+      self.home_abbreviation = self.team_stats["teams"][1]["teamName"]
+      self.away_abbreviation = self.team_stats["teams"][0]["teamName"]
 
     # Adjust goals for SO
     if self.game_state == "Final (SO)":
