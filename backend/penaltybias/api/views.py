@@ -9,11 +9,14 @@ class PenaltyApi(Resource):
     schedule = Schedule()
     responsejson = {"games" : []}
 
-    for pk in schedule.gamepks:
-      game = Game(pk)
-      game.predict_next_penalty()
-      gamejson = json.loads(json.dumps(game, cls=GameEncoder, indent=2))
-      responsejson["games"].append(gamejson)
+    if schedule.totalGames == 0:
+      pass
+    else:
+      for pk in schedule.gamepks:
+        game = Game(pk)
+        game.predict_next_penalty()
+        gamejson = json.loads(json.dumps(game, cls=GameEncoder, indent=2))
+        responsejson["games"].append(gamejson)
 
     return responsejson
 
