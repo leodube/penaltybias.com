@@ -5,5 +5,7 @@ Predicts which NHL team will get the next powerplay opportunity.
 - Flask
 - React
 - Bootstrap
-- Nelify
+
+### Hosted on:
+- Netlify
 - Heroku
