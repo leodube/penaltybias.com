@@ -8,4 +8,4 @@ Predicts which NHL team will get the next powerplay opportunity.
 
 ### Hosted on:
 - Netlify
-- Heroku
+- Vercel
