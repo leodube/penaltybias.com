@@ -6,7 +6,18 @@
 version: 2
 updates:
   - package-ecosystem: "npm"
-    directory: "/"
+    directory: "/frontend"
+    schedule:
+      interval: "daily"
+    target-branch: "develop"
+    labels:
+      - "dependencies"
+    # Add assignees
+    assignees:
+      - "leodube"
+
+  - package-ecosystem: "pip"
+    directory: "/api"
     schedule:
       interval: "daily"
     target-branch: "develop"
