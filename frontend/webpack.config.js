@@ -1,5 +1,4 @@
 const path = require("path");
-const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
@@ -38,25 +37,22 @@ module.exports = {
     filename: "bundle.js",
   },
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
-    compress: true,
+    static: {
+      directory: path.join(__dirname, "dist"),
+    },
     port: 3000,
-    hotOnly: true,
+    hot: "only",
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
     new ImageMinimizerPlugin({
       minimizerOptions: {
-        plugins: [
-          ["mozjpeg"],
-          ["pngquant"],
-        ],
+        plugins: [["mozjpeg"], ["pngquant"]],
       },
     }),
     new HtmlWebpackPlugin({
       template: "public/index.html",
-      favicon: "public/favicon.ico"
+      favicon: "public/favicon.ico",
     }),
   ],
 };
