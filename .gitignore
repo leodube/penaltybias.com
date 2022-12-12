@@ -1,9 +1,8 @@
-.DS_Store
-node_modules
+# python
 venv
 __pycache__
+  
+# misc
+.DS_Store
+.env.*
 .vscode
-reference
-dist
-.TODO
-
