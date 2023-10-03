@@ -8,6 +8,8 @@ class Game():
     # Call NHL API
     linescore = requests.get("https://statsapi.web.nhl.com/api/v1/game/{}/linescore".format(gamepk)).json()
     boxscore = requests.get("https://statsapi.web.nhl.com/api/v1/game/{}/boxscore".format(gamepk)).json()
+    home_team = requests.get("https://statsapi.web.nhl.com{}".format(boxscore["teams"]["home"]["link"])).json()
+    away_team = requests.get("https://statsapi.web.nhl.com{}".format(boxscore["teams"]["away"]["link"])).json()
 
     # Attempt to get skater stats
     try:
@@ -40,16 +42,18 @@ class Game():
       pass
 
     # Team Variables
-    self.home_team = boxscore["teams"]["home"]["team"]["name"]
-    self.home_id = boxscore["teams"]["home"]["team"]["id"]
-    self.home_svg = "https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{}.svg".format(self.home_id)
+    self.home_name = home_team["teams"]["name"]
+    self.home_id = home_team["teams"]["id"]
+    self.home_abbr = home_team["teams"]["abbreviation"]
+    self.home_svg = "https://assets.nhle.com/logos/nhl/svg/{}_light.svg".format(self.home_abbr)
     self.home_goals = home_stats["goals"]
     self.home_pps = home_stats["powerPlayOpportunities"]
     self.next_pp_odds = 0
 
-    self.away_team = boxscore["teams"]["away"]["team"]["name"]
-    self.away_id = boxscore["teams"]["away"]["team"]["id"]
-    self.away_svg = "https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/{}.svg".format(self.away_id)
+    self.away_name = away_team["teams"]["name"]
+    self.away_id = away_team["teams"]["name"]
+    self.away_abbr = away_team["teams"]["abbreviation"]
+    self.away_svg = "https://assets.nhle.com/logos/nhl/svg/{}_light.svg".format(self.away_abbr)
     self.away_goals = away_stats["goals"]
     self.away_pps = away_stats["powerPlayOpportunities"]
 
@@ -146,7 +150,7 @@ class GameEncoder(json.JSONEncoder):
         "teams" : {
           "away" : {
             "id" : obj.away_id,
-            "name" : obj.away_team,
+            "name" : obj.away_name,
             "abbreviation": obj.away_abbreviation,
             "logo" : obj.away_svg,
             "goals" : obj.away_goals,
@@ -154,7 +158,7 @@ class GameEncoder(json.JSONEncoder):
           },
           "home" : {
             "id" : obj.home_id,
-            "name" : obj.home_team,
+            "name" : obj.home_name,
             "abbreviation": obj.home_abbreviation,
             "logo" : obj.home_svg,
             "goals" : obj.home_goals,
