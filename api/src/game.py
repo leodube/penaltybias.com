@@ -8,8 +8,8 @@ class Game():
     # Call NHL API
     linescore = requests.get("https://statsapi.web.nhl.com/api/v1/game/{}/linescore".format(gamepk)).json()
     boxscore = requests.get("https://statsapi.web.nhl.com/api/v1/game/{}/boxscore".format(gamepk)).json()
-    home_team = requests.get("https://statsapi.web.nhl.com{}".format(boxscore["teams"]["home"]["link"])).json()
-    away_team = requests.get("https://statsapi.web.nhl.com{}".format(boxscore["teams"]["away"]["link"])).json()
+    home_team = requests.get("https://statsapi.web.nhl.com{}".format(boxscore["teams"]["home"]["team"]["link"])).json()
+    away_team = requests.get("https://statsapi.web.nhl.com{}".format(boxscore["teams"]["away"]["team"]["link"])).json()
 
     # Attempt to get skater stats
     try:
