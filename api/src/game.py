@@ -42,17 +42,17 @@ class Game():
       pass
 
     # Team Variables
-    self.home_name = home_team["teams"]["name"]
-    self.home_id = home_team["teams"]["id"]
-    self.home_abbr = home_team["teams"]["abbreviation"]
+    self.home_name = home_team["teams"][0]["name"]
+    self.home_id = home_team["teams"][0]["id"]
+    self.home_abbr = home_team["teams"][0]["abbreviation"]
     self.home_svg = "https://assets.nhle.com/logos/nhl/svg/{}_light.svg".format(self.home_abbr)
     self.home_goals = home_stats["goals"]
     self.home_pps = home_stats["powerPlayOpportunities"]
     self.next_pp_odds = 0
 
-    self.away_name = away_team["teams"]["name"]
-    self.away_id = away_team["teams"]["name"]
-    self.away_abbr = away_team["teams"]["abbreviation"]
+    self.away_name = away_team["teams"][0]["name"]
+    self.away_id = away_team["teams"][0]["id"]
+    self.away_abbr = away_team["teams"][0]["abbreviation"]
     self.away_svg = "https://assets.nhle.com/logos/nhl/svg/{}_light.svg".format(self.away_abbr)
     self.away_goals = away_stats["goals"]
     self.away_pps = away_stats["powerPlayOpportunities"]
