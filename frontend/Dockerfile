@@ -9,7 +9,8 @@ WORKDIR /app
 COPY . .
 
 # Install dependencies
-RUN npm ci
+# Replace with `npm ci` once a package-lock is added to the project
+RUN npm install
 
 # Build the application
 RUN npm run build
