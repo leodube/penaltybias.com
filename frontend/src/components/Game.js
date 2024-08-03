@@ -11,6 +11,7 @@ const Game = (props) => {
       state != "Scheduled" &&
       state != "Final" &&
       state != "Final (OT)" &&
+      state != "Final (SO)" &&
       state != "Error"
     ) {
       return (
