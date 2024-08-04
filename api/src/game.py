@@ -41,7 +41,7 @@ class Game:
         # Team Variables
         home_team = boxscore["homeTeam"]
         self.home_name = (
-            f"{home_team["placeName"]["default"]} {home_team["name"]["default"]}"
+            home_team["placeName"]["default"] + " " + home_team["name"]["default"]
         )
         self.home_id = home_team["id"]
         self.home_abbr = home_team["abbrev"]
@@ -52,7 +52,7 @@ class Game:
 
         away_team = boxscore["awayTeam"]
         self.away_name = (
-            f"{away_team["placeName"]["default"]} {away_team["name"]["default"]}"
+            away_team["placeName"]["default"] + " " + away_team["name"]["default"]
         )
         self.away_id = away_team["id"]
         self.away_abbr = away_team["abbrev"]
