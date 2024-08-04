@@ -9,7 +9,7 @@ updates:
     directory: "/frontend"
     schedule:
       interval: "daily"
-    target-branch: "develop"
+    target-branch: "dependabot"
     labels:
       - "dependencies"
     # Add assignees
@@ -20,7 +20,7 @@ updates:
     directory: "/api"
     schedule:
       interval: "daily"
-    target-branch: "develop"
+    target-branch: "dependabot"
     labels:
       - "dependencies"
     # Add assignees
